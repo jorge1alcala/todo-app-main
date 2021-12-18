@@ -3,7 +3,7 @@
 // ### Primary
 :root {
   --BrightBlue: hsl(220, 98%, 61%);
-  --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --CheckBackground: linear-gradient #57ddff to hsl(280, 87%, 65%);
 
   //### Neutral
 
@@ -34,7 +34,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 *,
@@ -55,6 +55,7 @@ body {
   right: 0;
   height: 350px;
   z-index: -1;
+  background-color: hsl(300, 88%, 25%);
 }
 .heather-img img {
   width: 100%;
@@ -101,13 +102,45 @@ body {
 }
 
 .check {
-  background-color: yellow;
   width: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.check-mark {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid hsl(237, 14%, 26%);
+  cursor: pointer;
+}
+.check-mark:hover {
+  background: linear-gradient(135deg, #57ddff 0%, #c058f3 100%);
 }
 .new-todo-input {
   flex-grow: 1;
-  background-color: yellowgreen;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
+.new-todo-input form {
+  flex-grow: 1;
+}
+
+.new-todo-input input {
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--LightGrayishBlue);
+  font-size: 1.8rem;
+}
+.new-todo-input input::placeholder {
+  color: hsl(233, 14%, 35%);
+}
+
+// footer
 .attribution {
   font-size: 11px;
   text-align: center;

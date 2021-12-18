@@ -1,6 +1,6 @@
 :root {
   --BrightBlue: hsl(220, 98%, 61%);
-  --CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --CheckBackground: linear-gradient #57ddff to hsl(280, 87%, 65%);
   --VeryLightGray: hsl(0, 0%, 98%);
   --VeryLightGrayishBlue: hsl(236, 33%, 92%);
   --LightGrayishBlue: hsl(233, 11%, 84%);
@@ -24,7 +24,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 *,
@@ -46,6 +46,7 @@ body {
   right: 0;
   height: 350px;
   z-index: -1;
+  background-color: #780878;
 }
 
 .heather-img img {
@@ -114,15 +115,73 @@ body {
 }
 
 .check {
-  background-color: yellow;
   width: 7rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.check-mark {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid #393a4c;
+  cursor: pointer;
+}
+
+.check-mark:hover {
+  background: linear-gradient(135deg, #57ddff 0%, #c058f3 100%);
 }
 
 .new-todo-input {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  background-color: yellowgreen;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.new-todo-input form {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.new-todo-input input {
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--LightGrayishBlue);
+  font-size: 1.8rem;
+}
+
+.new-todo-input input::-webkit-input-placeholder {
+  color: #4d5066;
+}
+
+.new-todo-input input:-ms-input-placeholder {
+  color: #4d5066;
+}
+
+.new-todo-input input::-ms-input-placeholder {
+  color: #4d5066;
+}
+
+.new-todo-input input::placeholder {
+  color: #4d5066;
 }
 
 .attribution {
