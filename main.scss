@@ -34,7 +34,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 *,
@@ -48,6 +48,7 @@ body {
   font-size: 1.8rem;
 }
 
+// image container heather center and top
 .heather-img {
   position: absolute;
   top: 0;
@@ -55,7 +56,6 @@ body {
   right: 0;
   height: 350px;
   z-index: -1;
-  background-color: hsl(300, 88%, 25%);
 }
 .heather-img img {
   width: 100%;
@@ -64,6 +64,7 @@ body {
   object-position: left;
 }
 
+// section container for all the todos list center
 .section {
   display: flex;
   flex-direction: column;
@@ -75,9 +76,9 @@ body {
 .container {
   width: 100%;
   max-width: 70rem;
-  // margin: 0 30px;
   margin-top: 10rem;
 }
+// todo header
 .header {
   display: flex;
   justify-content: space-between;
@@ -94,6 +95,7 @@ body {
   cursor: pointer;
 }
 
+// form to creat new toto
 .new-todo {
   background-color: var(--VeryDarkDesaturatedBlue);
   height: 70px;
@@ -131,11 +133,10 @@ body {
 .new-todo-input form {
   flex-grow: 1;
 }
-
 .new-todo-input input {
   width: 100%;
   padding: 1rem;
-  background-color: transparent;
+  background-color: transparent !important;
   border: none;
   outline: none;
   color: var(--LightGrayishBlue);
@@ -145,18 +146,11 @@ body {
   color: hsl(233, 14%, 35%);
 }
 
-// footer
-.attribution {
-  font-size: 11px;
-  text-align: center;
-}
-.attribution a {
-  color: hsl(228, 45%, 44%);
-}
-
+// Mostrando los todos
 .todo-item {
   width: 100%;
   display: flex;
+  background-color: var(--VeryDarkDesaturatedBlue);
   border-bottom: 1px solid var(--VeryDarkGrayishBlue);
   height: 70px;
   color: var(--LightGrayishBlue);
@@ -166,7 +160,7 @@ body {
 
 .todo-item:hover {
   transform: translate(-2px);
-  box-shadow: 0 0px 7px 0px var(--LightGrayishBlue-hover-);
+  box-shadow: 0 0px 7px 0px var(--VeryDarkBlue);
   border-color: var(--VeryDarkDesaturatedBlue);
 }
 .odo-items-wrapper:last-child {
@@ -184,4 +178,39 @@ body {
   border-radius: 0.6rem;
   overflow: hidden;
   box-shadow: 0px 2px 30px 0px rgba($color: #000004, $alpha: 1);
+}
+
+.todo-items-filter {
+  height: 7rem;
+  width: 100%;
+  color: var(--DarkGrayishBlue);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  // margin: 0 3rem;
+}
+.items-statuses {
+  display: flex;
+  justify-content: center;
+}
+.items-statuses span {
+  padding: 0 1rem;
+  cursor: pointer;
+}
+.items-statuses span:hover,
+.active,
+.items-clear:hover {
+  color: var(--BrightBlue);
+}
+.items-clear {
+  cursor: pointer;
+}
+
+// footer
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
 }

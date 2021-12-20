@@ -14,13 +14,29 @@
 
     <title>Frontend Mentor | Todo app</title>
 
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <!-- <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"
+    ></script>
+
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"
+    ></script> -->
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
@@ -40,9 +56,10 @@
             <div class="check-mark"></div>
           </div>
           <div class="new-todo-input">
-            <form onsubmit="getTodoInput(event)">
+            <form id="new-todo">
               <input
                 id="todo-input"
+                name="newTodo"
                 type="text"
                 class="form-control"
                 placeholder="Creat a Todo"
@@ -102,14 +119,22 @@
               <div class="todo-text">Cut the lawn</div>
             </div>
           </div>
-          <div class="todo-items-filter"></div>
+          <div class="todo-items-filter">
+            <div class="items-left">5 items left</div>
+            <div class="items-statuses">
+              <span class="active">All</span><span>Active</span
+              ><span>Completed</span>
+            </div>
+            <div class="items-clear">
+              <span>Clear Completed</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div>
         <!-- Add dynamic number -->
-        items left All Active Completed Clear Completed Drag and drop to reorder
-        list
+        Drag and drop to reorder list
       </div>
     </section>
 
@@ -119,6 +144,36 @@
         >Frontend Mentor</a
       >. Coded by <a href="#">Your Name Here</a>.
     </div>
-    <script src="app.js"></script>
+    <!-- Firebase -->
+    <!-- <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+      import {
+        collection,
+        addDoc
+      } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBXZBz5HUjp83nA1FaB0if0qLBztqhkkAc",
+        authDomain: "todo-app-react-60a96.firebaseapp.com",
+        projectId: "todo-app-react-60a96",
+        storageBucket: "todo-app-react-60a96.appspot.com",
+        messagingSenderId: "547046939684",
+        appId: "1:547046939684:web:38094ce4b7184f26390cb1",
+        measurementId: "G-82JN9S8PM2"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script> -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
