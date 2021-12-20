@@ -36,17 +36,74 @@ async function addItem(e){
       console.error('Error adding document: ', e);
     }
   
-  
     e.target.elements.newTodo.value = ''
+    getItems()
 }
 
+// viene de la forma para crear un nuevo todo
 document.querySelector('#new-todo').addEventListener('submit', addItem)
 
-// async function getMovies() {
-//   const movieCol = collection(db, 'movies');
-//   const moviesSnapshot = await getDocs(movieCol);
-//   const tempMovies = moviesSnapshot.docs.map((doc) => {
-//      return {id: doc.id, ...doc.data()};
-// })
+// getting the itmes from firebase
+async function getItems() {
+  const todoCol = collection(db, 'todo-items');
+  const todoSnapshot = await getDocs(todoCol);
+  let items = []
+  todoSnapshot.docs.map((doc) => {
+    items.push({
+      id: doc.id,
+      ...doc.data()
+    })
+    console.log(items);
+    generateItems(items)
+    //  return {id: doc.id, ...doc.data()};
+})
 // dispatch(setMovies(tempMovies));
-// };
+};
+
+// Creating the DOM list
+const generateItems = function(items){
+  let itemHTML = ''
+  items.map(item => {
+    itemHTML += `
+    <div class="todo-item">
+              <div class="check">
+                <div data-id="${item.id}" class="check-mark">
+                  <img src="./images/icon-check.svg" alt="" />
+                </div>
+              </div>
+              <div class="todo-text">${item.text}</div>
+            </div>
+    
+    `
+  });
+  document.querySelector('.todo-items').innerHTML = itemHTML
+}
+
+const createEventListeners = function(){
+  let todoCheckMarks = document.querySelectorAll('.todo-item .check-mark');
+  todoCheckMarks.forEach( checkMark => {
+    checkMark.addEventListener('click', function(){
+      markCompleted(checkMark.dataset.id)
+    })
+  })
+}
+
+async function markCompleted(id){
+  //from database
+  let item = doc(db, 'todo-items', id)
+  if(doc.exists){
+    let status = doc.data().status;
+    if(status == 'active'){
+      await updateDoc(item, {
+        status: 'complited'
+      })
+    }else if(status == complited){
+      await updateDoc(item, {
+        status: 'active'
+      })
+    }
+  }
+  
+}
+
+getItems()
