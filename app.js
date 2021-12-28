@@ -1,4 +1,4 @@
-import { collection, addDoc, getFirestore, getDocs } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"; 
+import { collection, addDoc, getFirestore, getDocs, getDoc, doc, query, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js"; 
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
@@ -21,6 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Add todos to database
 async function addItem(e){
   e.preventDefault();
   console.log(e);
@@ -38,36 +39,44 @@ async function addItem(e){
   
     e.target.elements.newTodo.value = ''
     getItems()
+
 }
 
 // viene de la forma para crear un nuevo todo
 document.querySelector('#new-todo').addEventListener('submit', addItem)
 
+
 // getting the itmes from firebase
+let items = []
 async function getItems() {
-  const todoCol = collection(db, 'todo-items');
-  const todoSnapshot = await getDocs(todoCol);
-  let items = []
-  todoSnapshot.docs.map((doc) => {
-    items.push({
-      id: doc.id,
-      ...doc.data()
+  const q = query(collection(db, 'todo-items'))
+  const todoSnapshot = onSnapshot(q, (querySnapshot) => {
+
+    querySnapshot.forEach((doc) => {
+      items.push({
+        id: doc.id,
+        ...doc.data()
+      })
     })
-    console.log(items);
+    
     generateItems(items)
-    //  return {id: doc.id, ...doc.data()};
-})
-// dispatch(setMovies(tempMovies));
+    
+  })
+  console.log(items);
+  
 };
 
 // Creating the DOM list
 const generateItems = function(items){
+ 
+
+
   let itemHTML = ''
   items.map(item => {
     itemHTML += `
     <div class="todo-item">
               <div class="check">
-                <div data-id="${item.id}" class="check-mark">
+                <div data-id="${item.id}" class="check-mark ${item.status == 'complited' ? 'checked' : ''}">
                   <img src="./images/icon-check.svg" alt="" />
                 </div>
               </div>
@@ -75,8 +84,11 @@ const generateItems = function(items){
             </div>
     
     `
-  });
+   
+  }); 
+  
   document.querySelector('.todo-items').innerHTML = itemHTML
+  createEventListeners()
 }
 
 const createEventListeners = function(){
@@ -86,24 +98,44 @@ const createEventListeners = function(){
       markCompleted(checkMark.dataset.id)
     })
   })
-}
-
-async function markCompleted(id){
-  //from database
-  let item = doc(db, 'todo-items', id)
-  if(doc.exists){
-    let status = doc.data().status;
-    if(status == 'active'){
-      await updateDoc(item, {
-        status: 'complited'
-      })
-    }else if(status == complited){
-      await updateDoc(item, {
-        status: 'active'
-      })
-    }
-  }
   
 }
 
+async function markCompleted(id){
+ 
+    const item = doc(db, 'todo-items', id)
+    const docSnap = await getDoc(item);
+    
+    if (docSnap.exists()) {
+      let status = docSnap.data().status;
+      if (status === 'active') {
+            await updateDoc(item, {
+            status: 'complited'
+          })
+          
+         } else if (status === 'complited') {
+          await updateDoc(item, {
+            status: 'active'
+          })
+          
+         }
+    } else {
+      console.log("No such document!");
+    }
+    
+    
+console.log(docSnap.data().status);
+
+}
+
+ const filteredTodos = async function(items){
+  
+  const todoFiltered = items.filter(function(todo){
+    return todo.includes(todo.status == 'complited')
+  })
+    console.log(todoFiltered);
+  
+}
+filteredTodos(items)
 getItems()
+console.log(items.id);
